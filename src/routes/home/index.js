@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import logo from '../../images/logo.png';
-import './home.css';
-const FA = require('react-fontawesome');
+import React, { Component } from "react";
+import logo from "../../images/logo.png";
+import "./home.css";
+const FA = require("react-fontawesome");
 
 class Home extends Component {
-
   render() {
     return (
       <div className="App">
         <div className="App-header">
-        
+
           <img src={logo} className="App-logo" alt="logo" />
           <h2>SURVIVORS</h2>
         </div>
 
-        <p className="App-intro">
+        <div className="App-intro">
           <button className="button dark">
-            <FA name='steam' className="btn-icon" />
+            <FA name="steam" className="btn-icon" />
             SIGN IN WITH STEAM
           </button>
-        </p>
+        </div>
 
-        <p className="App-intro">
+        <div className="App-intro">
           <h2>AND</h2>
-        </p>
+        </div>
 
-        <p className="App-intro">
+        <div className="App-intro">
           <button className="button orange">
-            <FA name='user-plus' className="btn-icon" />
+            <FA name="user-plus" className="btn-icon" />
             START MATCHING
           </button>
-        </p>
+        </div>
       </div>
     );
   }
