@@ -17,7 +17,7 @@ class Home extends Component {
         <p className="App-intro">
           <button className="button dark">
             <FA name='steam' className="btn-icon" />
-            Sign in with Steam
+            SIGN IN WITH STEAM
           </button>
         </p>
 
@@ -28,7 +28,7 @@ class Home extends Component {
         <p className="App-intro">
           <button className="button orange">
             <FA name='user-plus' className="btn-icon" />
-            Start Matching
+            START MATCHING
           </button>
         </p>
       </div>

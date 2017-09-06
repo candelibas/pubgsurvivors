@@ -16,13 +16,14 @@ body {
   margin-top: 13vh;
 }
 
-.App-header {
+.App-header h2{
+  letter-spacing: 2px;
   color: #fff;
 }
 
 
 .App-intro {
-  font-size: large;
+  letter-spacing: 2px;
 }
 
 @keyframes App-logo-spin {

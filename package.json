@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
+    "react-burger-menu": "^2.1.5",
     "react-dom": "^15.6.1",
     "react-flexbox-grid": "^1.1.5",
     "react-fontawesome": "^1.6.1",
