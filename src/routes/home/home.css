@@ -1,5 +1,5 @@
 body {
-  background: url('../../images/bg.jpg') no-repeat center center fixed; 
+  background: url('../../images/bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,7 +17,7 @@ body {
 }
 
 .App-header h2{
-  letter-spacing: 2px;
+  letter-spacing: 2pt;
   color: #fff;
 }
 
