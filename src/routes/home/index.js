@@ -1,12 +1,15 @@
-import React, { Component } from "react";
-import logo from "../../images/logo.png";
-import "./home.css";
-const FA = require("react-fontawesome");
+import React, { Component } from 'react';
+import Menu from '../../components/Menu';
+import logo from '../../images/logo.png';
+import './home.css';
+const FA = require('react-fontawesome');
+
 
 class Home extends Component {
   render() {
     return (
       <div className="App">
+        <Menu />
         <div className="App-header">
 
           <img src={logo} className="App-logo" alt="logo" />

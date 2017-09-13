@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Menu from '../../components/Menu';
 import logo from '../../images/logo.png';
-import './edit-profile.css';
+import './about.css';
 const FA = require('react-fontawesome');
 
-class EditProfile extends Component {
+class Matching extends Component {
   render() {
     return (
       <div className="App">
@@ -12,7 +12,11 @@ class EditProfile extends Component {
         <div className="App-header">
 
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>PROFILE</h2>
+          <h2>Matching</h2>
+        </div>
+
+        <div className="App-intro">
+          <p>Finding your best friend <3...</p>
         </div>
 
       </div>
@@ -20,4 +24,4 @@ class EditProfile extends Component {
   }
 }
 
-export default EditProfile;
+export default Matching;
