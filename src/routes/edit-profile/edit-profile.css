@@ -1,32 +1,123 @@
-body {
+.edit-profile {
+  background: #000;
+}
+.header {
   background: url('../../images/bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-
+.full {
+  background: #000;
+  height: 100%;
+}
+.Page {
+  background: #000;
+}
 .App {
   text-align: center;
 }
 
-.App-logo {
-  /* animation: App-logo-spin infinite 20s linear; */
-  height: 100px;
-  margin-top: 13vh;
-}
-
-.App-header h2{
+.App-header h2 {
   letter-spacing: 2pt;
   color: #fff;
 }
-
-
 .App-intro {
   letter-spacing: 2px;
 }
+/* INPUT */
+input[type=text] {
+  color: #fff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: none;
+  background-color: none;
+  background: transparent;
+  outline: 0;
+  font-size: 14px;
+  width: 300px;
+  height: 30px;
+  border-bottom: 2px solid #262626;
+}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+input[type=text]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+  width: 300px;
+  height: 30px;
+  border-bottom: 2px solid #E69800;
+}
+
+input[type=text]::placeholder {
+  color: #262626;
+  font-weight: bold;
+}
+
+/* Switch Checkbox */
+.onoffswitch {
+  position: relative;
+  width: 112px;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+  display: none;
+}
+.onoffswitch-label {
+  display: block; 
+  overflow:hidden; 
+  cursor: pointer;
+  border-radius: 0px;
+}
+.onoffswitch-inner {
+  display: block; 
+  width: 200%; 
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block; 
+  float: left; 
+  width: 50%; 
+  height: 50px; 
+  padding: 0; 
+  line-height: 46px;
+  font-size: 15px; 
+  color: white; 
+  font-family: Trebuchet, Arial, sans-serif; 
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.onoffswitch-inner:before {
+  content: "YES";
+  background-color: #E69800; 
+  color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+  content: "NO";
+  padding-right: 40px;
+  background-color: #0A0000; 
+  color: #FFFFFF;
+  text-align: right;
+}
+.onoffswitch-switch {
+  display: block; 
+  width: 0px; 
+  margin: 0px;
+  background: #FFFFFF;
+  position: absolute; 
+  top: 0; 
+  bottom: 0;
+  right: 112px;
+  transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
 }

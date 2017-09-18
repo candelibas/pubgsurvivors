@@ -10,7 +10,7 @@
   position: fixed;
   width: 36px;
   height: 20px;
-  left: 36px;
+  right: 36px;
   top: 36px;
   overflow: hidden;
 }
@@ -58,7 +58,7 @@
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
   padding-left: 1.5em;
   padding-bottom: .5em;
   padding-top: .5em;

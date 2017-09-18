@@ -6,6 +6,11 @@ const FA = require('react-fontawesome');
 
 
 class Home extends Component {
+
+  componentDidMount() {
+    document.body.className = 'home';
+  }
+
   render() {
     return (
       <div className="App">
