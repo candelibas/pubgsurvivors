@@ -34,6 +34,7 @@ class Home extends Component {
 
         <div className="App-intro">
           <button className="button orange">
+          {/* <button className="button orange btn-disabled"> */}
             <FA name="user-plus" className="btn-icon" />
             START MATCHING
           </button>

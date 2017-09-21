@@ -8,10 +8,6 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.full {
-  background: #000;
-  height: 100%;
-}
 .Page {
   background: #000;
 }
@@ -27,6 +23,11 @@
   letter-spacing: 2px;
 }
 /* INPUT */
+.label {
+  color: #262626;
+  font-weight: 600;
+}
+
 input[type=text] {
   color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -55,29 +56,29 @@ input[type=text]::placeholder {
 }
 
 /* Switch Checkbox */
-.onoffswitch {
+.onoffswitch-yes {
   position: relative;
   width: 112px;
   -webkit-user-select: none; 
   -moz-user-select: none; 
   -ms-user-select: none;
 }
-.onoffswitch-checkbox {
+.onoffswitch-checkbox-yes {
   display: none;
 }
-.onoffswitch-label {
+.onoffswitch-label-yes {
   display: block; 
   overflow:hidden; 
   cursor: pointer;
   border-radius: 0px;
 }
-.onoffswitch-inner {
+.onoffswitch-inner-yes {
   display: block; 
   width: 200%; 
   margin-left: -100%;
   transition: margin 0.3s ease-in 0s;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
+.onoffswitch-inner-yes:before, .onoffswitch-inner-yes:after {
   display: block; 
   float: left; 
   width: 50%; 
@@ -92,19 +93,20 @@ input[type=text]::placeholder {
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-.onoffswitch-inner:before {
+.onoffswitch-inner-yes:before {
   content: "YES";
   background-color: #E69800; 
   color: #FFFFFF;
+  padding-left: 40px;
 }
-.onoffswitch-inner:after {
+.onoffswitch-inner-yes:after {
   content: "NO";
   padding-right: 40px;
   background-color: #0A0000; 
   color: #FFFFFF;
   text-align: right;
 }
-.onoffswitch-switch {
+.onoffswitch-switch-yes {
   display: block; 
   width: 0px; 
   margin: 0px;
@@ -115,9 +117,88 @@ input[type=text]::placeholder {
   right: 112px;
   transition: all 0.3s ease-in 0s;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+.onoffswitch-checkbox-yes:checked + .onoffswitch-label-yes .onoffswitch-inner-yes {
   margin-left: 0;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+.onoffswitch-checkbox-yes:checked + .onoffswitch-label-yes .onoffswitch-switch-yes {
   right: 0px;
+}
+/* Second checkbox */
+.onoffswitch-mode {
+  position: relative;
+  width: 112px;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
+}
+.onoffswitch-checkbox-mode {
+  display: none;
+}
+.onoffswitch-label-mode {
+  display: block; 
+  overflow:hidden; 
+  cursor: pointer;
+  border-radius: 0px;
+}
+.onoffswitch-inner-mode {
+  display: block; 
+  width: 200%; 
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner-mode:before, .onoffswitch-inner-mode:after {
+  display: block; 
+  float: left; 
+  width: 50%; 
+  height: 50px; 
+  padding: 0; 
+  line-height: 46px;
+  font-size: 15px; 
+  color: white; 
+  font-family: Trebuchet, Arial, sans-serif; 
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.onoffswitch-inner-mode:before {
+  content: "Hardcore";
+  background-color: #E69800; 
+  color: #FFFFFF;
+  padding-left: 20px;
+}
+.onoffswitch-inner-mode:after {
+  content: "Casual";
+  padding-right: 30px;
+  background-color: #0A0000; 
+  color: #FFFFFF;
+  text-align: right;
+}
+.onoffswitch-switch-mode {
+  display: block; 
+  width: 0px; 
+  margin: 0px;
+  background: #FFFFFF;
+  position: absolute; 
+  top: 0; 
+  bottom: 0;
+  right: 112px;
+  transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox-mode:checked + .onoffswitch-label-mode .onoffswitch-inner-mode {
+  margin-left: 0;
+}
+.onoffswitch-checkbox-mode:checked + .onoffswitch-label-mode .onoffswitch-switch-mode {
+  right: 0px;
+}
+/* Profile icon */
+.profile-icon {
+  font-size: 26px;
+  margin-right: 13px;
+}
+.profile-discord {
+  width: 32px;
+  height: 32px;
+  padding-right: 7px;
+  margin-bottom: -10px;
 }

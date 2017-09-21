@@ -1,0 +1,22 @@
+.about {
+  background: #000;
+}
+.header {
+  background: url('../../images/bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.content {
+  background: #1A1818;
+  border-radius: 10px;
+  margin-top: 3vh;
+}
+.about-intro {
+  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.patreon-btn:hover {
+  opacity: 0.9;
+}
