@@ -41,7 +41,7 @@ app.get('/login', function(req, res) {
 
 app.get('/auth', steam.authenticate(), function(req, res) {
 	res.redirect('/');
-	console.log(req);
+	//console.log(req);
 });
 
 
@@ -64,7 +64,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 			token: token
 		}); */
 		res.cookie('token', token);
-		res.redirect('/');
+		res.redirect('https://pubgsurvivors.herokuapp.com');
 		
 	}
 	else {
