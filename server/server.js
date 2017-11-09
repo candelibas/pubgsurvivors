@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: 'http://pubgsurvivors.herokuapp.com:5000/', 
+	realm: 'http://pubgsurvivors.herokuapp.com/', 
 	verify: 'http://pubgsurvivors.herokuapp.com/verify',
 	apiKey: '9F244C44270D8C67BC15EA8ABF706FC6'}
 ));
