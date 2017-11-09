@@ -12,7 +12,7 @@ class EditProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {username: null};
   }
 
   componentDidMount() {
@@ -33,6 +33,7 @@ class EditProfile extends Component {
           <Row>
             <Col xs>
               <h2 style={{marginTop: '5vh', marginBottom: '5vh'}}>PROFILE</h2>
+              <h2>{this.state.username}</h2>
             </Col>
           </Row>
           </Grid>
