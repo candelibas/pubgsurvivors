@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const TOKEN_SECRET = 'dafuqsecret';
+const token_secret = 'dafuqsecret';
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -57,7 +57,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 			avatar: req.user.avatar.medium
 		};
 		
-		token = jwt.sign(userData, TOKEN_SECRET, { expiresIn: 4000 });
+		token = jwt.sign(userData, token_secret, { expiresIn: 4000 });
 
 		/*res.json({
 			status: 'authorized',
@@ -82,7 +82,7 @@ app.get('/authcheck', function(req, res) {
 	let token = req.cookies.token;
 
 	// verify a token symmetric
-	jwt.verify(token, TOKEN_SECRET, function(err, decoded) {
+	jwt.verify(token, token_secret, function(err, decoded) {
 		if(err) {
 			res.json({ status: 'not_authed' });
 		} else {
