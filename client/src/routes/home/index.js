@@ -34,7 +34,7 @@ class Home extends Component {
   }
 
   loginWithSteam = () => {
-    window.location = "https://pubgsurvivors.herokuapp.com/auth";
+    window.location = "http://pubgsurvivors.herokuapp.com/auth";
   }
 
   render() {
