@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const token_secret = 'dafuqsecret';
+const TOKEN_SECRET = 'dafuqsecret';
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: 'https://pubgsurvivors.herokuapp.com/', 
+	realm: 'https://pubgsurvivors.herokuapp.com', 
 	verify: 'https://pubgsurvivors.herokuapp.com/verify',
 	apiKey: '9F244C44270D8C67BC15EA8ABF706FC6'}
 ));
@@ -41,7 +41,7 @@ app.get('/login', function(req, res) {
 
 app.get('/auth', steam.authenticate(), function(req, res) {
 	res.redirect('/');
-	//console.log(req);
+	console.log(req);
 });
 
 
@@ -57,7 +57,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 			avatar: req.user.avatar.medium
 		};
 		
-		token = jwt.sign(userData, token_secret, { expiresIn: 4000 });
+		token = jwt.sign(userData, TOKEN_SECRET, { expiresIn: 4000 });
 
 		/*res.json({
 			status: 'authorized',
@@ -82,7 +82,7 @@ app.get('/authcheck', function(req, res) {
 	let token = req.cookies.token;
 
 	// verify a token symmetric
-	jwt.verify(token, token_secret, function(err, decoded) {
+	jwt.verify(token, TOKEN_SECRET, function(err, decoded) {
 		if(err) {
 			res.json({ status: 'not_authed' });
 		} else {
