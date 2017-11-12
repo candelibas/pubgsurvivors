@@ -17,8 +17,8 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: 'http://localhost:5000/', 
-	verify: 'http://localhost:5000/verify',
+	realm: 'http://pubgsurvivors.com/', 
+	verify: 'http://pubgsurvivors.com/verify',
 	apiKey: '9F244C44270D8C67BC15EA8ABF706FC6'}
 ));
 
@@ -64,7 +64,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 			token: token
 		}); */
 		res.cookie('token', token);
-		res.redirect('http://localhost:3000');
+		res.redirect('/');
 		
 	}
 	else {

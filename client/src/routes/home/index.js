@@ -56,7 +56,7 @@ class Home extends Component {
   }
 
   loginWithSteam = () => {
-    window.location = "http://localhost:5000/auth";
+    window.location = "/auth";
   }
 
   render() {
