@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 class About extends Component {
 
   componentDidMount() {
+    document.title = 'PUBG Survivors - About';
     document.body.className = 'about';
   }
 

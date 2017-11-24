@@ -5,6 +5,12 @@ import './about.css';
 const FA = require('react-fontawesome');
 
 class Matching extends Component {
+
+  componentDidMount() {
+    document.title = 'PUBG Survivors - Matching'; 
+    document.body.className = 'matching';
+  }
+
   render() {
     return (
       <div className="App">

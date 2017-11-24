@@ -21,7 +21,8 @@ class Home extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    document.title = 'PUBG Survivors - Home';
     document.body.className = 'home';
     // This binding is necessary to make `this` work in the callback
     this.loginWithSteam = this.loginWithSteam.bind(this);
@@ -30,6 +31,7 @@ class Home extends Component {
     axios.get('/authcheck')
     .then((response) => {
 
+      // Set state for authenticated user
       if(response.data.status === 'authed')
       {
         this.setState({
@@ -41,7 +43,7 @@ class Home extends Component {
           avatar: response.data.user.avatar
         });
       }
-
+      // Set loader indicator state for not authenticated user
       if(response.data.status === 'not_authed') {
         this.setState({
           loading: false
@@ -56,7 +58,7 @@ class Home extends Component {
   }
 
   loginWithSteam = () => {
-    window.location = "/auth";
+    window.location = "http://localhost:5000/auth";
   }
 
   render() {
@@ -86,7 +88,7 @@ class Home extends Component {
         <div className="App-intro">
 
           {loading &&
-            <div style={{textAlign: 'center', marginLeft: 820 + 'px'}}><Spinner name="pacman" /></div>
+            <div style={{display: 'flex', justifyContent: 'center', marginBottom: '10px'}}><Spinner name="pacman" /></div>
           }
 
           {!loading &&

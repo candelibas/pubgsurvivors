@@ -16,6 +16,7 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
+    document.title = 'PUBG Survivors - Edit Profile';
     document.body.className = 'edit-profile';
   }
 
