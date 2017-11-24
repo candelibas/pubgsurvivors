@@ -17,27 +17,11 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: 'http://pubgsurvivors.com/', 
-	verify: 'http://pubgsurvivors.com/verify',
+	realm: 'http://localhost:5000/', 
+	verify: 'http://localhost:5000/verify',
 	apiKey: '9F244C44270D8C67BC15EA8ABF706FC6'}
 ));
 
-
-// Answer API requests.
-app.get('/api', function (req, res) {
-  res.set('Content-Type', 'application/json');
-  res.send('{"message":"Hello from the custom server!"}');
-});
-
-app.get('/login', function(req, res) {
-  res.json([{
-  	id: 1,
-  	username: "samsepi0l"
-  }, {
-  	id: 2,
-  	username: "D0loresH4ze"
-  }]);
-});
 
 app.get('/auth', steam.authenticate(), function(req, res) {
 	res.redirect('/');
@@ -59,12 +43,8 @@ app.get('/verify', steam.verify(), function(req, res) {
 		
 		token = jwt.sign(userData, TOKEN_SECRET, { expiresIn: 4000 });
 
-		/*res.json({
-			status: 'authorized',
-			token: token
-		}); */
 		res.cookie('token', token);
-		res.redirect('/');
+		res.redirect('http://localhost:3000');
 		
 	}
 	else {
@@ -77,6 +57,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 
 });
 
+// Check if user is authenticated with Steam
 app.get('/authcheck', function(req, res) {
 
 	let token = req.cookies.token;
@@ -101,8 +82,6 @@ app.get('/logout', steam.enforceLogin('/'), function(req, res) {
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
-
-
 
 app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
