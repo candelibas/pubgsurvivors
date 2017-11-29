@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Menu from '../../components/Menu';
 import logo from '../../images/logo.png';
 import './home.css';
+import { Link } from 'react-router-dom';
 const FA = require('react-fontawesome');
 const axios = require('axios');
 const Spinner = require('react-spinkit');
@@ -62,11 +63,10 @@ class Home extends Component {
   }
 
   render() {
-    
-    const { loading, username } = this.state;  
-    const user_check = this.state.username ? 
-    <h3>Welcome, {this.state.username} </h3>
-    : 
+    const { loading, username, auth } = this.state;  
+    const user_check = username ? 
+    <h3>Welcome, {username} </h3>
+    : // Otherwise,
     <div className="App-intro">
     <button className="button dark" onClick={this.loginWithSteam}>
       <FA name="steam" className="btn-icon" />
@@ -99,11 +99,21 @@ class Home extends Component {
 
 
         <div className="App-intro">
-          <button className="button orange">
-          {/* <button className="button orange btn-disabled"> */}
-            <FA name="user-plus" className="btn-icon" />
-            START MATCHING
-          </button>
+          {auth === 'authed' && 
+            <Link to="/about">
+            <button className="button orange">
+              <FA name="user-plus" className="btn-icon" />
+              START MATCHING
+            </button>
+            </Link>
+          }
+
+          {!auth && 
+            <button className="button orange btn-disabled" disabled>
+              <FA name="user-plus" className="btn-icon" />
+              START MATCHING
+            </button>
+          }
         </div>
       </div>
     );
