@@ -5,7 +5,7 @@ import discord_logo from '../../images/discord_logo.svg';
 import './edit-profile.css';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-const FA = require('react-fontawesome');
+import FA from 'react-fontawesome';
 
 
 class EditProfile extends Component {

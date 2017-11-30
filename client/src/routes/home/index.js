@@ -3,9 +3,9 @@ import Menu from '../../components/Menu';
 import logo from '../../images/logo.png';
 import './home.css';
 import { Link } from 'react-router-dom';
-const FA = require('react-fontawesome');
-const axios = require('axios');
-const Spinner = require('react-spinkit');
+import { isSteamLoggedIn } from '../../utils/steam-api';
+import FA from 'react-fontawesome';
+import Spinner from 'react-spinkit';
 
 class Home extends Component {
 
@@ -29,7 +29,7 @@ class Home extends Component {
     this.loginWithSteam = this.loginWithSteam.bind(this);
 
     // Check Steam authentication
-    axios.get('/authcheck')
+    isSteamLoggedIn()
     .then((response) => {
 
       // Set state for authenticated user
