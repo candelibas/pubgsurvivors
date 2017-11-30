@@ -71,3 +71,14 @@ body {
   background-color: #E69702;
   border-bottom: 4px solid #E69702;
 }
+
+/* LINKS */
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #E69702;
+}
+a:hover {
+  font-weight: bolder;
+  opacity: 0.9;
+}
