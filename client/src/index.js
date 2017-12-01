@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-000000-01');
+ReactGA.pageview(window.location.pathname + window.location.search);
 // Route
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './routes/home/';
