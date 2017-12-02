@@ -77,7 +77,7 @@ app.get('/verify', steam.verify(), function(req, res) {
 									// Set cookie for json webtoken data and return user to home page
 									res.cookie('token', token);
 									//res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
-									res.redirect(`http://${HOST}`); // prod
+									res.redirect('/'); // prod
 							} else {
 									throw error;
 							}
