@@ -14,12 +14,11 @@ class Menu extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // We have menu on all pages, so we can use Google Analytics in here
     ReactGA.initialize('UA-110532802-1');
     ReactGA.pageview(window.location.pathname + window.location.search);
-  }
 
-  componentDidMount() {
     isSteamLoggedIn()
     .then((res) => {
       if(res.data.status === 'authed' ) { 
