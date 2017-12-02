@@ -3,6 +3,7 @@ import './Menu.css';
 import { slide as Sidemenu } from 'react-burger-menu';
 import { Link } from 'react-router-dom';
 import { isSteamLoggedIn } from '../../utils/steam-api';
+import ReactGA from 'react-ga';
 
 class Menu extends Component {
 
@@ -11,6 +12,11 @@ class Menu extends Component {
     this.state = {
       auth: null
     };
+  }
+
+  componentWillMount() {
+    ReactGA.initialize('UA-110532802-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   componentDidMount() {
