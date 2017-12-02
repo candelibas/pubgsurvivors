@@ -28,8 +28,8 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: `http://${HOST}:${PORT}`, 
-	verify: `http://${HOST}:${PORT}/verify`,
+	realm: `http://${HOST}`, //http://${HOST}:${PORT} - dev
+	verify: `http://${HOST}/verify`, //http://${HOST}:${PORT}/verify - dev
 	apiKey: config.STEAM_API_KEY
 }));
 
