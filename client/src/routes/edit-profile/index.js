@@ -12,7 +12,7 @@ class EditProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {username: null};
+    this.state = { username: null };
   }
 
   componentDidMount() {
@@ -24,23 +24,23 @@ class EditProfile extends Component {
     return (
       <div>
         <div className="header">
-        <Menu />
-        <Grid style={{paddingLeft: '10px'}}>
-          <Row style={{paddingTop: '36' + 'px'}}>
-            <Col xs>
-               <Link to="/"><img src={logo} style={{width: 300}} alt="logo" /></Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs>
-              <h2 style={{marginTop: '5vh', marginBottom: '5vh'}}>PROFILE</h2>
-              <h2>{this.state.username}</h2>
-            </Col>
-          </Row>
+          <Menu />
+          <Grid style={{ paddingLeft: '10px' }}>
+            <Row style={{ paddingTop: '36' + 'px' }}>
+              <Col xs>
+                <Link to="/"><img src={logo} style={{ width: 300 }} alt="logo" /></Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs>
+                <h2 style={{ marginTop: '5vh', marginBottom: '5vh' }}>PROFILE</h2>
+                <h2>{this.state.username}</h2>
+              </Col>
+            </Row>
           </Grid>
-          </div>
+        </div>
         <div>
-          <Grid style={{padding: '10px'}}>
+          <Grid style={{ padding: '10px' }}>
 
             <Row>
               <Col xs>
@@ -55,7 +55,7 @@ class EditProfile extends Component {
                 <p><input type="text" placeholder="FAVOURITE GAMES" /></p>
 
                 <p className="label">DO YOU HAVE MICROPHONE?</p>
-                
+
                 <div className="onoffswitch-yes">
                   <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox-yes" id="myonoffswitch-yes" />
                   <label className="onoffswitch-label-yes" htmlFor="myonoffswitch-yes">
@@ -74,11 +74,11 @@ class EditProfile extends Component {
                 </div>
 
               </Col>
-              
+
             </Row>
 
             {/* SOCIAL LINKS*/}
-            <Row style={{marginTop: '2vh'}}>
+            <Row style={{ marginTop: '2vh' }}>
               <Col xs>
                 <h2>LINKS</h2>
               </Col>
@@ -93,18 +93,18 @@ class EditProfile extends Component {
 
             <Row>
               <Col xs>
-              
-                <button className="button orange" style={{fontSize: '16px', padding: '15px'}}>
+
+                <button className="button orange" style={{ fontSize: '16px', padding: '15px' }}>
                   <FA name="check" className="btn-icon" />
                   SAVE
                 </button>
-                
+
               </Col>
             </Row>
 
           </Grid>
         </div>
-        
+
       </div>
     );
   }

@@ -34,16 +34,16 @@ app.use(steam.middleware({
 }));
 
 // Login via Steam
-app.get('/auth', steam.authenticate(), function(req, res) {
+app.get('/auth', steam.authenticate(), function (req, res) {
 	res.redirect('/');
 	//console.log(req);
 });
 
 // Return callback for steam login
-app.get('/verify', steam.verify(), function(req, res) {
+app.get('/verify', steam.verify(), function (req, res) {
 	let token;
 
-	if(req.user) {
+	if (req.user) {
 		let userData = {
 			steamid: req.user.steamid,
 			username: req.user.username,
@@ -53,38 +53,38 @@ app.get('/verify', steam.verify(), function(req, res) {
 
 		// If user data exists, do not create another one!
 		let condition = { steamid: userData.steamid };
-		let update = { 
+		let update = {
 			steamid: userData.steamid,
 			username: userData.username,
 			steam_profile: userData.profile,
-			avatar: userData.avatar 
+			avatar: userData.avatar
 		};
 		let options = { upsert: true };
 
 		User.findOneAndUpdate(condition, update, options, (error, result) => {
 			if (!error) {
-					// If the document doesn't exist
-					if (!result) {
-							// Create it
-							result = new Model();
+				// If the document doesn't exist
+				if (!result) {
+					// Create it
+					result = new Model();
+				}
+				// Save the document
+				result.save(function (error) {
+					if (!error) {
+						// Create our json webtoken for user data
+						token = jwt.sign(userData, config.JWT_SECRET, { expiresIn: 4000 });
+
+						// Set cookie for json webtoken data and return user to home page
+						res.cookie('token', token);
+						//res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
+						res.redirect('/'); // prod
+					} else {
+						throw error;
 					}
-					// Save the document
-					result.save(function(error) {
-							if (!error) {
-									// Create our json webtoken for user data
-									token = jwt.sign(userData, config.JWT_SECRET, { expiresIn: 4000 });
-									
-									// Set cookie for json webtoken data and return user to home page
-									res.cookie('token', token);
-									//res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
-									res.redirect('/'); // prod
-							} else {
-									throw error;
-							}
-					});
+				});
 			}
-	});
-		
+		});
+
 	}
 	else {
 		res.json({
@@ -92,18 +92,18 @@ app.get('/verify', steam.verify(), function(req, res) {
 		});
 	}
 
-	
+
 
 });
 
 // Check if user is authenticated with Steam
-app.get('/authcheck', function(req, res) {
+app.get('/authcheck', function (req, res) {
 
 	let token = req.cookies.token;
 
 	// verify a token symmetric
-	jwt.verify(token, config.JWT_SECRET, function(err, decoded) {
-		if(err) {
+	jwt.verify(token, config.JWT_SECRET, function (err, decoded) {
+		if (err) {
 			res.json({ status: 'not_authed' });
 		} else {
 			res.json({ status: 'authed', user: decoded });
@@ -113,16 +113,16 @@ app.get('/authcheck', function(req, res) {
 });
 
 // Probably not need but let it stay for logout from Steam
-app.get('/logout', steam.enforceLogin('/'), function(req, res) {
+app.get('/logout', steam.enforceLogin('/'), function (req, res) {
 	req.logout();
 	res.redirect('/');
 });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+app.get('*', function (request, response) {
+	response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(PORT, function () {
-  console.log(`Listening on port ${PORT}`);
+	console.log(`Listening on port ${PORT}`);
 });
