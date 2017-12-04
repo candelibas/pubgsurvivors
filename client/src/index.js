@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // Routes
@@ -8,29 +8,31 @@ import EditProfile from './routes/edit-profile/';
 import About from './routes/about/';
 import NotFound from './routes/not-found/';
 // Utils
-import { isSteamLoggedIn } from './utils/steam-api';
-
+//import PrivateRoute from '../src/components/PrivateRoute/';
 import registerServiceWorker from './registerServiceWorker';
 
+/*
+This is for PrivateRoute component which we do not need it right now but who knows? Yeah...
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) => authed === 'authed'
         ? <Component {...props} />
-        : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
+        : <Redirect to={{ pathname: '/about', state: { from: props.location } }} />}
     />
   )
-}
+} 
+
+<PrivateRoute path='/profile' component={EditProfile} />
+*/
 
 ReactDOM.render(
   <Router>
-    <Switch>
+    <Switch>  
       <Route exact path='/' component={Home} />
       <Route path='/about' component={About} />
-      <PrivateRoute authed={
-        isSteamLoggedIn().then((res) => (res.data.status))
-      } path='/profile' component={EditProfile} />
+      <Route path='/profile' component={EditProfile} />
       <Route component={NotFound} />
     </Switch>
   </Router>,
