@@ -28,8 +28,8 @@ app.use(cookieParser());
 
 app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 app.use(steam.middleware({
-	realm: `http://${HOST}:${PORT}`, //http://${HOST}:${PORT} - dev
-	verify: `http://${HOST}:${PORT}/verify`, //http://${HOST}:${PORT}/verify - dev
+	realm: `http://${HOST}`, //http://${HOST}:${PORT} - dev
+	verify: `http://${HOST}/verify`, //http://${HOST}:${PORT}/verify - dev
 	apiKey: config.STEAM_API_KEY
 }));
 
@@ -76,8 +76,8 @@ app.get('/verify', steam.verify(), function (req, res) {
 
 						// Set cookie for json webtoken data and return user to home page
 						res.cookie('token', token);
-						res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
-						//res.redirect('/'); // prod
+						//res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
+						res.redirect('/'); // prod
 					} else {
 						throw error;
 					}
