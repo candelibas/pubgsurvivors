@@ -6,21 +6,50 @@ import './edit-profile.css';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import FA from 'react-fontawesome';
+import { isSteamLoggedIn } from '../../utils/steam-api';
 
 
 class EditProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: null };
+    this.state = { 
+      loading: false,
+      username: null,
+      auth: null,
+      steam_profile: null
+    };
   }
 
   componentDidMount() {
     document.title = 'PUBG Survivors - Edit Profile';
     document.body.className = 'edit-profile';
+
+    isSteamLoggedIn()
+      .then((res) => {
+        if(res.data.status === 'authed') {
+          this.setState({
+            loading: false,
+            auth: res.data.status,
+            username: res.data.user.username,
+            steam_profile: res.data.user.profile,
+          });
+        } else {
+          window.location = '/';
+        }
+      })
+      .catch((err) => { console.log(err); }); 
+
+  }
+
+  saveProfileSubmit = (event) => {
+    //event.preventDefault();
+    console.log("Saved");
+    
   }
 
   render() {
+    console.log(this.state.steam_profile);
     return (
       <div>
         <div className="header">
@@ -47,7 +76,8 @@ class EditProfile extends Component {
                 <h2>INFORMATION</h2>
               </Col>
             </Row>
-
+            
+            <form onSubmit={this.saveProfileSubmit}>
             <Row>
               <Col xs>
                 <input type="text" placeholder="LANGUAGES" />
@@ -94,13 +124,14 @@ class EditProfile extends Component {
             <Row>
               <Col xs>
 
-                <button className="button orange" style={{ fontSize: '16px', padding: '15px' }}>
+                <button type="submit" className="button orange" style={{ fontSize: '16px', padding: '15px' }}>
                   <FA name="check" className="btn-icon" />
                   SAVE
                 </button>
 
               </Col>
             </Row>
+            </form>
 
           </Grid>
         </div>
