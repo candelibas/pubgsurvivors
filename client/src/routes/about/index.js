@@ -18,7 +18,7 @@ class About extends Component {
     return (
       <div>
         <div className="header">
-        <Menu />
+        <Menu auth={this.props.auth} />
         <Grid style={{paddingLeft: '10px'}}>
           <Row style={{paddingTop: '36' + 'px'}}>
             <Col xs>

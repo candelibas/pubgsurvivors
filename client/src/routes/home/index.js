@@ -3,7 +3,6 @@ import Menu from '../../components/Menu';
 import logo from '../../images/logo.png';
 import './home.css';
 import { Link } from 'react-router-dom';
-import { isSteamLoggedIn } from '../../utils/steam-api';
 import FA from 'react-fontawesome';
 import Spinner from 'react-spinkit';
 
@@ -13,13 +12,9 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      loading: true,
-      auth: null,
-      steamid: null,
-      username: null,
-      profile: null,
-      avatar: null
+      loading: true
     };
+
   }
 
   componentDidMount() {
@@ -27,33 +22,22 @@ class Home extends Component {
     document.body.className = 'home';
     // This binding is necessary to make `this` work in the callback
     this.loginWithSteam = this.loginWithSteam.bind(this);
-
-    // Check Steam authentication
-    isSteamLoggedIn()
-      .then((response) => {
-
-        // Set state for authenticated user
-        if (response.data.status === 'authed') {
-          this.setState({
-            loading: false,
-            auth: response.data.status,
-            steamid: response.data.user.steamid,
-            username: response.data.user.username,
-            profile: response.data.user.profile,
-            avatar: response.data.user.avatar
-          });
-        }
-        // Set loader indicator state for not authenticated user
-        if (response.data.status === 'not_authed') {
-          this.setState({
-            loading: false
-          });
-        }
-
-      })
-      .catch(function (error) {
-        console.log(error);
+   
+    const { auth } = this.props; 
+    
+    // Set state for authenticated user
+    if (auth === 'authed') {
+      this.setState({
+        loading: false
       });
+    } 
+    else {
+      // Set loader indicator state for not authenticated user
+      this.setState({
+        loading: false
+      });
+    }
+
 
   }
 
@@ -62,21 +46,26 @@ class Home extends Component {
   }
 
   render() {
-    const { loading, username, auth } = this.state;
+    const { username, auth } = this.props;
+    const { loading } = this.state;
     const user_check = username ?
-      <h3>Welcome, {username} </h3>
+      <div>
+        <p><img src={this.props.avatar} style={{ borderRadius: '5px' }} alt=""/></p>
+        <h3>{username} </h3>
+      </div>
+      
       : // Otherwise,
       <div className="App-intro">
         <button className="button dark" onClick={this.loginWithSteam}>
           <FA name="steam" className="btn-icon" />
           SIGN IN WITH STEAM
-    </button>
+        </button>
         <h2>AND</h2>
       </div>
 
     return (
       <div className="App">
-        <Menu />
+        <Menu auth={auth} />
         <div className="App-header">
 
           <img src={logo} className="App-logo" alt="logo" />

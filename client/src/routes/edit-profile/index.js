@@ -43,17 +43,18 @@ class EditProfile extends Component {
   }
 
   saveProfileSubmit = (event) => {
-    //event.preventDefault();
-    console.log("Saved");
+    event.preventDefault();
+    //alert(event.target.onoffswitch.value);
     
   }
 
   render() {
+    const { username } = this.props;
     console.log(this.state.steam_profile);
     return (
       <div>
         <div className="header">
-          <Menu />
+          <Menu auth={this.props.auth} />
           <Grid style={{ paddingLeft: '10px' }}>
             <Row style={{ paddingTop: '36' + 'px' }}>
               <Col xs>
@@ -63,7 +64,7 @@ class EditProfile extends Component {
             <Row>
               <Col xs>
                 <h2 style={{ marginTop: '5vh', marginBottom: '5vh' }}>PROFILE</h2>
-                <h2>{this.state.username}</h2>
+                <h2>{username}</h2>
               </Col>
             </Row>
           </Grid>

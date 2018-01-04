@@ -72,12 +72,12 @@ app.get('/verify', steam.verify(), function (req, res) {
 				result.save(function (error) {
 					if (!error) {
 						// Create our json webtoken for user data
-						token = jwt.sign(userData, config.JWT_SECRET, { expiresIn: 4000 });
+						token = jwt.sign(userData, config.JWT_SECRET, { expiresIn: '1h' });
 
 						// Set cookie for json webtoken data and return user to home page
 						res.cookie('token', token);
-						//res.redirect(`http://${HOST}:${CI_PORT}`); // dev - heroku does not let us to use port
-						res.redirect('/'); // prod
+						res.redirect(`/`); // dev - heroku does not let us to use port
+						//res.redirect('/'); // prod
 					} else {
 						throw error;
 					}
@@ -106,7 +106,16 @@ app.get('/authcheck', function (req, res) {
 		if (err) {
 			res.json({ status: 'not_authed' });
 		} else {
-			res.json({ status: 'authed', user: decoded });
+
+			User.find({"steamid": decoded.steamid}, (err, user_data) => {  
+				if (err) {
+					res.json({ status: 'no_user' });
+				} else {
+						res.json({ status: 'authed', user: user_data });
+				}
+			});
+
+			
 		}
 	});
 
@@ -119,14 +128,32 @@ app.get('/logout', steam.enforceLogin('/'), function (req, res) {
 });
 
 /*
-// Update user profile
-app.get('/get-profile-details', function (req, res) {
+// Get user profile
+app.get('/get-profile', function (req, res) {
+
+	let token = req.cookies.token;
 	// verify a token symmetric
 	jwt.verify(token, config.JWT_SECRET, function (err, decoded) {
 		if (err) {
 			res.json({ status: 'not_authed' });
 		} else {
 			// Seek and destroy! Jebaited
+			User.
+			res.json({ status: 'authed', user: decoded });
+		}
+	});
+}); */
+
+/* Update user profile
+app.post('update-profile', (req, res) => {
+	const { steamid } = req.body;
+	let token = req.cookies.token;
+	jwt.verify(token, config.JWT_SECRET, (err, decoded) => {
+		if (err) {
+			res.json({ status: 'not_authed' });
+		} else {
+			// Update user profile on Mongoose
+
 			User.
 			res.json({ status: 'authed', user: decoded });
 		}
