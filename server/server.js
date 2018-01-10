@@ -22,33 +22,66 @@ const CI_PORT = process.env.PORT || 3000; // 3000: React dev server port
 const HOST = process.env.HOST || 'localhost';
 const ENV = process.env.NODE_ENV || 'production';
 
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete Steam profile is serialized
+//   and deserialized.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+app.use(require('express-session')({ resave: true, saveUninitialized: true, name: 'sesid', secret: 'a secret' }));
+
+passport.use(new SteamStrategy({
+	returnURL: `http://${HOST}:${PORT}/auth/steam/return`,
+	realm: `http://${HOST}:${PORT}`,
+	apiKey: config.STEAM_API_KEY
+},
+function(identifier, profile, done) {
+	// asynchronous verification, for effect...
+	process.nextTick(function () {
+
+		// To keep the example simple, the user's Steam profile is returned to
+		// represent the logged-in user.  In a typical application, you would want
+		// to associate the Steam account with a user record in your database,
+		// and return that user instead.
+		profile.identifier = identifier;
+		return done(null, profile);
+	});
+}
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cookieParser());
 
-app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
-app.use(steam.middleware({
-	realm: `http://${HOST}`, //http://${HOST}:${PORT} - dev
-	verify: `http://${HOST}/verify`, //http://${HOST}:${PORT}/verify - dev
-	apiKey: config.STEAM_API_KEY
-}));
+app.get('/auth/steam',
+  passport.authenticate('steam'),
+  function(req, res) {
+    // The request will be redirected to Steam for authentication, so
+    // this function will not be called.
+  });
 
-// Login via Steam
-app.get('/auth', steam.authenticate(), function (req, res) {
-	res.redirect('/');
-	//console.log(req);
-});
-
-// Return callback for steam login
-app.get('/verify', steam.verify(), function (req, res) {
-	let token;
+app.get('/auth/steam/return',
+  passport.authenticate('steam', { failureRedirect: '/login' }),
+  function(req, res) {
+		let token;
 
 	if (req.user) {
 		let userData = {
-			steamid: req.user.steamid,
-			username: req.user.username,
-			profile: req.user.profile,
-			avatar: req.user.avatar.medium
+			steamid: req.user._json.steamid,
+			username: req.user.displayName,
+			profile: req.user._json.profileurl,
+			avatar: req.user._json.avatarmedium
 		};
 
 		// If user data exists, do not create another one!
@@ -91,10 +124,10 @@ app.get('/verify', steam.verify(), function (req, res) {
 			status: 'not authorized'
 		});
 	}
+  });
 
 
 
-});
 
 // Check if user is authenticated with Steam
 app.get('/authcheck', function (req, res) {
@@ -121,11 +154,6 @@ app.get('/authcheck', function (req, res) {
 
 });
 
-// Probably not need but let it stay for logout from Steam
-app.get('/logout', steam.enforceLogin('/'), function (req, res) {
-	req.logout();
-	res.redirect('/');
-});
 
 /*
 // Get user profile
