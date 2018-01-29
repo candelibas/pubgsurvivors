@@ -33,7 +33,7 @@ class Routes extends React.Component {
             auth: response.data.status,
             steamid: response.data.user[0].steamid,
             username: response.data.user[0].username,
-            profile: response.data.user[0].profile,
+            profile: response.data.user[0].steam_profile,
             avatar: response.data.user[0].avatar
           });
         }

@@ -40,8 +40,8 @@ passport.deserializeUser(function(obj, done) {
 app.use(require('express-session')({ resave: true, saveUninitialized: true, name: 'sesid', secret: 'a secret' }));
 
 passport.use(new SteamStrategy({
-	returnURL: `http://${HOST}:${PORT}/auth/steam/return`,
-	realm: `http://${HOST}:${PORT}`,
+	returnURL: `http://${HOST}/auth/steam/return`,
+	realm: `http://${HOST}`,
 	apiKey: config.STEAM_API_KEY
 },
 function(identifier, profile, done) {
@@ -125,8 +125,6 @@ app.get('/auth/steam/return',
 		});
 	}
   });
-
-
 
 
 // Check if user is authenticated with Steam

@@ -11,11 +11,11 @@ const userSchema = new Schema({
     type: Array, 
     default: ['all'] 
   },
-  reddit: { type: String, default: ''},
-  discord: { type: String, default: ''},
-  fav_games: { type: String, default: ''},
-  microphone: { type: Boolean, default: true},
-  gamestyle: { type: String, default: ''}
+  reddit: { type: String, default: '' },
+  discord: { type: String, default: '' },
+  fav_games: { type: String, default: '' },
+  microphone: { type: Boolean, default: true },
+  gamestyle: { type: String, default: true }
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -42,7 +42,14 @@ class Home extends Component {
   }
 
   loginWithSteam = () => {
-    window.location = "http://pubgsurvivors.com/auth";
+    let hostname = window.location.hostname;
+    if(hostname == 'localhost') {
+      window.location = "http://localhost:5000/auth/steam";
+    }
+    else {
+      window.location = "http://pubgsurvivors.com/auth/steam";
+    }
+    
   }
 
   render() {

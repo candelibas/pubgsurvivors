@@ -17,7 +17,8 @@ class EditProfile extends Component {
       loading: false,
       username: null,
       auth: null,
-      steam_profile: null
+      gamestyle: null,
+      microphone: null
     };
   }
 
@@ -27,15 +28,20 @@ class EditProfile extends Component {
 
     isSteamLoggedIn()
       .then((res) => {
-        if(res.data.status === 'authed') {
-          this.setState({
-            loading: false,
-            auth: res.data.status,
-            username: res.data.user.username,
-            steam_profile: res.data.user.profile,
-          });
-        } else {
+        if(res.data.status !== 'authed') {
           window.location = '/';
+        } else {
+          
+          const { gamestyle, microphone, discord, reddit, lang, fav_games } = res.data.user[0];
+          console.log("aq: " + microphone);
+          this.setState({
+            lang: lang,
+            fav_games: fav_games,
+            gamestyle: gamestyle,
+            microphone: microphone,
+            discord: discord,
+            reddit: reddit
+          });
         }
       })
       .catch((err) => { console.log(err); }); 
@@ -44,17 +50,19 @@ class EditProfile extends Component {
 
   saveProfileSubmit = (event) => {
     event.preventDefault();
-    //alert(event.target.onoffswitch.value);
+    console.log(event.target.microphone.checked);
+    console.log(event.target.gamestyle.checked);
     
   }
 
   render() {
-    const { username } = this.props;
-    console.log(this.state.steam_profile);
+    const { auth, username, profile } = this.props;
+    const { lang, fav_games, gamestyle, microphone, reddit, discord } = this.state;
+    console.log("mik: " + microphone);
     return (
       <div>
         <div className="header">
-          <Menu auth={this.props.auth} />
+          <Menu auth={auth} />
           <Grid style={{ paddingLeft: '10px' }}>
             <Row style={{ paddingTop: '36' + 'px' }}>
               <Col xs>
@@ -81,14 +89,14 @@ class EditProfile extends Component {
             <form onSubmit={this.saveProfileSubmit}>
             <Row>
               <Col xs>
-                <input type="text" placeholder="LANGUAGES" />
+                <input type="text" placeholder="LANGUAGES" name="languages" />
 
                 <p><input type="text" placeholder="FAVOURITE GAMES" /></p>
 
                 <p className="label">DO YOU HAVE MICROPHONE?</p>
 
                 <div className="onoffswitch-yes">
-                  <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox-yes" id="myonoffswitch-yes" />
+                  <input type="checkbox" name="microphone" className="onoffswitch-checkbox-yes" id="myonoffswitch-yes" defaultChecked={microphone} />
                   <label className="onoffswitch-label-yes" htmlFor="myonoffswitch-yes">
                     <span className="onoffswitch-inner-yes" />
                     <span className="onoffswitch-switch-yes" />
@@ -97,7 +105,7 @@ class EditProfile extends Component {
 
                 <p className="label">WHAT IS YOUR GAME STYLE?</p>
                 <div className="onoffswitch-mode">
-                  <input type="checkbox" name="onoffswitch" className="onoffswitch-checkbox-mode" id="myonoffswitch-mode" />
+                  <input type="checkbox" name="gamestyle" className="onoffswitch-checkbox-mode" id="myonoffswitch-mode" />
                   <label className="onoffswitch-label-mode" htmlFor="myonoffswitch-mode">
                     <span className="onoffswitch-inner-mode" />
                     <span className="onoffswitch-switch-mode" />
@@ -116,7 +124,7 @@ class EditProfile extends Component {
             </Row>
             <Row>
               <Col xs>
-                <p><FA name="steam-square" className="profile-icon" /><input type="text" placeholder="steamcommunity.com/id/username" /></p>
+                <p><FA name="steam-square" className="profile-icon" /><input type="text" disabled placeholder={profile} value={profile || ''} /></p>
                 <p><img src={discord_logo} className="profile-discord" /> <input type="text" placeholder="username#1231" /></p>
                 <p><FA name="reddit" className="profile-icon" /><input type="text" placeholder="REDDIT USERNAME" /></p>
               </Col>
